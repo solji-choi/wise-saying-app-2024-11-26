@@ -1,16 +1,19 @@
 package com.ll;
 
 import com.ll.domain.system.controller.controller.SystemController;
+import com.ll.wiseSaying.controller.WiseSayingController;
 
 import java.util.Scanner;
 
 public class App {
     private final Scanner scanner;
     private final SystemController systemController;
+    private final WiseSayingController wiseSayingController;
 
     public App(Scanner scanner) {
         this.scanner = scanner;
         this.systemController = new SystemController();
+        this.wiseSayingController = new WiseSayingController(scanner);
     }
     public void run() {
         System.out.println("== 명언 앱 ==");
@@ -24,8 +27,7 @@ public class App {
 
                 break;
             } else if(cmd.equals("등록")) {
-                System.out.println("명언 : ");
-                System.out.println("작가 : ");
+                wiseSayingController.actionAdd();
             }
 
         }
