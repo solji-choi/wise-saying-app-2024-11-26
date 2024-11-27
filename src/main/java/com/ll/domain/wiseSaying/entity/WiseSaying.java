@@ -2,9 +2,11 @@ package com.ll.domain.wiseSaying.entity;
 
 import com.ll.wiseSaying.controller.WiseSayingController;
 import lombok.Getter;
+import lombok.Setter;
 
 public class WiseSaying {
     @Getter
+    @Setter
     private int id;
     private String content;
     private String author;
@@ -17,10 +19,6 @@ public class WiseSaying {
 
     public boolean isNew() {
         return id == 0;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getContent() {
