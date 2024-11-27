@@ -124,11 +124,11 @@ public class WiseSayingControllerTest {
                 등록
                 과거에 집착하지 마라.
                 작자미상
-                삭제?id=3
+                삭제?id=4
                 목록
                 """);
 
         assertThat(output)
-                .contains("1번 명언은 존재하지 않습니다.");
+                .contains("4번 명언은 존재하지 않습니다.");
     }
 }
