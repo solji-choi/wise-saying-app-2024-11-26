@@ -4,17 +4,12 @@ import com.ll.wiseSaying.controller.WiseSayingController;
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 public class WiseSaying {
-    @Getter
-    @Setter
+
     private int id;
-
-    @Getter
-    @Setter
     private String content;
-
-    @Getter
-    @Setter
     private String author;
 
     public WiseSaying(int id, String content, String author) {
