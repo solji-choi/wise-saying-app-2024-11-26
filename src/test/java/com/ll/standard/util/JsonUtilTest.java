@@ -82,4 +82,27 @@ public class JsonUtilTest {
                 }
                 """.stripIndent().trim());
     }
+
+    @Test
+    @DisplayName("맵을 JSON으로 바꿀 수 있다.(논리 필드)")
+    public void t5() {
+        Map<String, Object> map = new LinkedHashMap<>();
+        map.put("id", 1);
+        map.put("name", "이름");
+        map.put("gender", "남자");
+        map.put("height", 178.1543221);
+        map.put("married", true);
+
+        String jsonStr = Util.json.toString(map);
+
+        assertThat(jsonStr).isEqualTo("""
+                {
+                    "id": 1,
+                    "name": "이름",
+                    "gender": "남자",
+                    "height": 178.1543221,
+                    "married": true
+                }
+                """.stripIndent().trim());
+    }
 }
