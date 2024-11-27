@@ -25,7 +25,7 @@ public class WiseSaying {
         return content;
     }
 
-    public void setContent() {
+    public void setContent(String content) {
         this.content = content;
     }
 
@@ -33,7 +33,7 @@ public class WiseSaying {
         return author;
     }
 
-    public void setAuthor() {
+    public void setAuthor(String author) {
         this.author = author;
     }
 }
