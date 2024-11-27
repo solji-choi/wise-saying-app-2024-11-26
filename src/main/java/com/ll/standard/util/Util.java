@@ -8,7 +8,9 @@ import java.util.Map;
 
 public class Util {
     public static class file {
-        private file() {} //유틸리티 클래스의 인스턴스화 방지
+        private file() {
+        } //유틸리티 클래스의 인스턴스화 방지
+
         public static void touch(String filePath) {
             set(filePath, "");
         }
@@ -73,7 +75,7 @@ public class Util {
 
         private static void handleFileWriteError(Path path, String content, IOException e) {
             Path parentDir = path.getParent();
-            if(parentDir != null && Files.notExists(parentDir)) {
+            if (parentDir != null && Files.notExists(parentDir)) {
                 try {
                     Files.createDirectories(parentDir);
                     writeFile(path, content);
@@ -101,7 +103,8 @@ public class Util {
     }
 
     public static class json {
-        private json() {}
+        private json() {
+        }
 
         public static String toString(Map<String, Object> map) {
             StringBuilder sb = new StringBuilder();
@@ -113,14 +116,14 @@ public class Util {
                 sb.append("    ");
                 key = "\"" + key + "\"";
 
-                if(value instanceof String) {
+                if (value instanceof String) {
                     value = "\"" + value + "\"";
                 }
 
                 sb.append("%s: %s,\n".formatted(key, value));
             });
 
-            if(!map.isEmpty()) {
+            if (!map.isEmpty()) {
                 sb.delete(sb.length() - 2, sb.length());
             }
 
@@ -137,20 +140,31 @@ public class Util {
 
             String[] jsonStrBits = jsonStr.split(",\n    \"");
 
-            for(String jsonStrBit : jsonStrBits){
+            for (String jsonStrBit : jsonStrBits) {
                 jsonStrBit = jsonStrBit.trim();
 
-                if(jsonStrBit.endsWith(",")) jsonStrBit = jsonStrBit.substring(0, jsonStrBit.length() - 1);
+                if (jsonStrBit.endsWith(",")) jsonStrBit = jsonStrBit.substring(0, jsonStrBit.length() - 1);
 
                 String[] jsonField = jsonStrBit.split("\": ");
 
                 String key = jsonField[0];
 
-                if(key.startsWith("\"")) key = key.substring(1);
+                if (key.startsWith("\"")) key = key.substring(1);
 
-                String value = jsonField[1].substring(1, jsonField[1].length() - 1);
+                boolean valueIsString = jsonField[1].startsWith("\"") && jsonField[1].endsWith("\"");
+                String value = jsonField[1];
 
-                map.put(key, value);
+                if (valueIsString) value = value.substring(1, value.length() - 1);
+
+                if (valueIsString) {
+                    map.put(key, value);
+                } else if (value.equals("true") || value.equals("false")) {
+                    map.put(key, value.equals("true"));
+                } else if (value.contains(".")) {
+                    map.put(key, Double.parseDouble(value));
+                } else {
+                    map.put(key, Integer.parseInt(value));
+                }
             }
 
             return map;
