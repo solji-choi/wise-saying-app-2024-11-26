@@ -5,6 +5,7 @@ import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class Util {
     public static class file {
@@ -103,6 +104,13 @@ public class Util {
             } else {
                 throw new RuntimeException("파일 접근 실패 : " + path, e);
             }
+        }
+
+        public static Stream<Path> walkRegularFiles(String dirPath, String fileNameRegex) throws IOException {
+            return Files.walk(Path.of(dirPath))
+                    .filter(Files::isRegularFile)
+                    .filter(path -> path.getFileName().toString().matches(fileNameRegex));
+
         }
 
         private static class FileDeleteVisitor extends SimpleFileVisitor<Path> {

@@ -43,12 +43,13 @@ public class WiseSayingFileRepository implements WiseSayingRepository {
 
     public List<WiseSaying> findAll() {
         try {
-            return Files.walk(Path.of(getTableDirPath()))
-                    .filter(Files::isRegularFile)
-                    .filter(path -> path.getFileName().toString().matches("\\d+\\.json"))
+            return Util.file.walkRegularFiles(
+                            getTableDirPath(),
+                            "\\d+\\.json"
+                    )
                     .map(path -> Util.file.get(path.toString(), ""))
-                    .map(jsonString -> Util.json.toMap(jsonString))
-                    .map(map -> new WiseSaying(map))
+                    .map(Util.json::toMap)
+                    .map(WiseSaying::new)
                     .toList();
         } catch (NoSuchFileException e) {
             return List.of();
