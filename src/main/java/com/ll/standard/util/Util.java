@@ -23,6 +23,10 @@ public class Util {
             return !exists(filePath);
         }
 
+        public static void set(String filePath, int content) {
+            set(filePath, String.valueOf(content));
+        }
+
         public static void set(String filePath, String content) {
             Path path = getPath(filePath);
 
@@ -37,6 +41,20 @@ public class Util {
             try {
                 return Files.readString(getPath(filePath));
             } catch (IOException e) {
+                return defaultValue;
+            }
+        }
+
+        public static int getAsInt(String filePath, int defaultValue) {
+            String content = get(filePath, "");
+
+            if(content.isBlank()) {
+                return defaultValue;
+            }
+
+            try {
+                return Integer.parseInt(content);
+            } catch (NumberFormatException e) {
                 return defaultValue;
             }
         }
