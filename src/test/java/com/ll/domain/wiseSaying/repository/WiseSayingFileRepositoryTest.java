@@ -5,6 +5,7 @@ import com.ll.standard.util.Util;
 import org.junit.jupiter.api.*;
 
 import java.util.Map;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -54,5 +55,20 @@ public class WiseSayingFileRepositoryTest {
         assertThat(
                 Util.file.exists(filePath)
         ).isFalse();
+    }
+
+    @Test
+    @DisplayName("명언 단건조회")
+    public void t3() {
+        WiseSaying wiseSaying = new WiseSaying(0, "꿈을 지녀라. 그러면 어려운 현실을 이길 수 있다.", "괴테");
+        wiseSayingRepository.save(wiseSaying);
+
+        Optional<WiseSaying> opWiseSaying = wiseSayingRepository.findById(wiseSaying.getId());
+
+        String filePath = WiseSayingFileRepository.getRowFilePath(wiseSaying.getId());
+
+        assertThat(
+                opWiseSaying.get()
+        ).isEqualTo(wiseSaying);
     }
 }
