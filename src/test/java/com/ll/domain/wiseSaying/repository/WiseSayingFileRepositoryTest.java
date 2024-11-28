@@ -13,13 +13,12 @@ public class WiseSayingFileRepositoryTest {
 
     @BeforeEach
     public void beforeEach() {
-        Util.file.rmdir("db");
-        Util.file.mkdir("db");
+        Util.file.rmdir(WiseSayingFileRepository.getTableDirPath());
     }
 
     @AfterEach
     public void afterEach() {
-        Util.file.rmdir("db");
+        Util.file.rmdir(WiseSayingFileRepository.getTableDirPath());
     }
 
     @Test
@@ -28,7 +27,7 @@ public class WiseSayingFileRepositoryTest {
         WiseSaying wiseSaying = new WiseSaying(0, "꿈을 지녀라. 그러면 어려운 현실을 이길 수 있다.", "괴테");
         wiseSayingRepository.save(wiseSaying);
 
-        String filePath = "db/test/wiseSaying/1.json";
+        String filePath = WiseSayingFileRepository.getRowFilePath(wiseSaying.getId());
 
         assertThat(
                 Util.file.exists(filePath)
@@ -50,7 +49,7 @@ public class WiseSayingFileRepositoryTest {
 
         wiseSayingRepository.deleteById(wiseSaying.getId());
 
-        String filePath = "db/test/wiseSaying/1.json";
+        String filePath = WiseSayingFileRepository.getRowFilePath(wiseSaying.getId());
 
         assertThat(
                 Util.file.exists(filePath)
