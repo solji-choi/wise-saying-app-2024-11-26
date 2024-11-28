@@ -1,10 +1,9 @@
 package com.ll.wiseSaying.controller;
 
-import com.ll.Command;
+import com.ll.global.app.Command;
 import com.ll.domain.wiseSaying.entity.WiseSaying;
 import com.ll.domain.wiseSaying.service.WiseSayingService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;

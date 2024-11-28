@@ -1,6 +1,7 @@
 package com.ll.domain.wiseSaying.repository;
 
 import com.ll.domain.wiseSaying.entity.WiseSaying;
+import com.ll.global.app.AppConfig;
 import com.ll.standard.util.Util;
 
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.util.*;
 
 public class WiseSayingFileRepository implements WiseSayingRepository {
     public static String getTableDirPath() {
-        return "db/test/wiseSaying";
+        return AppConfig.getDbDirPath() + "/wiseSaying";
     }
 
     public static String getRowFilePath(int id) {

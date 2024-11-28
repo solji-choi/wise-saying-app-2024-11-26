@@ -1,6 +1,7 @@
 package com.ll.domain.wiseSaying.repository;
 
 import com.ll.domain.wiseSaying.entity.WiseSaying;
+import com.ll.global.app.AppConfig;
 import com.ll.standard.util.Util;
 import org.junit.jupiter.api.*;
 
@@ -11,6 +12,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WiseSayingFileRepositoryTest {
     private final WiseSayingFileRepository wiseSayingRepository = new WiseSayingFileRepository();
+
+    @BeforeAll
+    public static void beforeAll() {
+        AppConfig.setTestMode();
+    }
 
     @BeforeEach
     public void beforeEach() {
