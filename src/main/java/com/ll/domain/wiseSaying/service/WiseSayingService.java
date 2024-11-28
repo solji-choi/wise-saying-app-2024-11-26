@@ -1,6 +1,7 @@
 package com.ll.domain.wiseSaying.service;
 
 import com.ll.domain.wiseSaying.entity.WiseSaying;
+import com.ll.domain.wiseSaying.repository.WiseSayingFileRepository;
 import com.ll.domain.wiseSaying.repository.WiseSayingMemoryRepository;
 import com.ll.domain.wiseSaying.repository.WiseSayingRepository;
 
@@ -12,7 +13,7 @@ public class WiseSayingService {
     private final WiseSayingRepository wiseSayingRepository;
 
     public WiseSayingService() {
-        this.wiseSayingRepository = new WiseSayingMemoryRepository();
+        this.wiseSayingRepository = new WiseSayingFileRepository();
     }
 
     public WiseSaying add(String content, String author) {
