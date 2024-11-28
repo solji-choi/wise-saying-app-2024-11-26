@@ -1,5 +1,6 @@
 package com.ll.domain.wiseSaying.entity;
 
+import com.ll.standard.util.Util;
 import com.ll.wiseSaying.controller.WiseSayingController;
 import lombok.*;
 
@@ -22,6 +23,10 @@ public class WiseSaying {
         this.author = (String) map.get("author");
     }
 
+    public WiseSaying(String jsonStr) {
+        this(Util.json.toMap(jsonStr));
+    }
+
     public boolean isNew() {
         return id == 0;
     }
@@ -34,5 +39,9 @@ public class WiseSaying {
         map.put("author", author);
 
         return map;
+    }
+
+    public String toJsonStr() {
+        return Util.json.toString(toMap());
     }
 }
